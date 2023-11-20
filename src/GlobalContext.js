@@ -13,22 +13,25 @@ export const GlobalContext = createContext({
 const GlobalState = ({children}) =>  {
 
     const [searchParam,setSearchParam] = useState ("");
+    const [movieList,setMovieList] = useState ([]);
 
-    const handleOnChange = () => {
-
+    const handleOnChange = (event) => {
+        console.log(event.target.value);
+        setSearchParam(event.target.value)
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
+        const response = await fetch(`http://www.omdbapi.com/?s=${searchParam}&apikey=13f31283`)
+        const data = await response.json();
+        console.log(data);
+        if(data) setMovieList(data.Search)
 
     }
 
     const contextValue ={
         searchParam,
-        handleOnChange : (event) => {
-            console.log(event.target.value)
-            setSearchParam(event.target.value)
-        },
-        handleSubmit : () => {},
+        handleOnChange,
+        handleSubmit,
         movieList: [],
         loading:false
     }; 
@@ -39,3 +42,9 @@ const GlobalState = ({children}) =>  {
 }
 
 export default GlobalState;
+
+
+// (event) => {
+//     console.log(event.target.value)
+//     setSearchParam(event.target.value)
+// },

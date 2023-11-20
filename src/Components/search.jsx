@@ -2,8 +2,7 @@ import React, { useContext } from "react";
 import { GlobalContext } from "../GlobalContext";
 
 const Search = () => {
-  const { searchParam, handleOnChange, handleSubmit } =
-    useContext(GlobalContext);
+  const { searchParam, handleOnChange, handleSubmit } = useContext(GlobalContext);
   return (
     <div>
       <input
